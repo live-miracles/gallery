@@ -6,7 +6,6 @@ Here you can monitor multiple YouTube, JW, Facebook, and other live broadcasts s
 
 It provides usefull features:
 
--   Audio VU meter, which shows audio levels on the right side.
--   Sets lowest quality for all playing YouTube videos.
--   And others!
-
+- Audio VU meter, which shows audio levels on the right side.
+- Sets lowest quality for all playing YouTube videos.
+- And others!
