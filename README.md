@@ -1,4 +1,4 @@
-# [Live Streaming Gallery](https://alexfreik.github.io/lsm/gallery/)
+# Live Streaming Gallery
 
 <img width="700" alt="Live Streaming Gallery" src="https://github.com/user-attachments/assets/c0d302e0-d959-4d95-9b85-f93a4c9b2fc5">
 
