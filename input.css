@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+svg {
+    fill: currentColor;
+}
+
+input {
+    @apply m-1 bg-transparent text-sm text-slate-50;
+}
+
+iframe {
+    @apply absolute left-0 top-0 h-full w-full bg-neutral;
+    color-scheme: light;
+    width: 160% !important;
+    height: 160% !important;
+    -webkit-transform: scale(0.625);
+    transform: scale(0.625);
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+}
+
+.box {
+    animation: fadeInRight 1s ease-out;
+}
+
+.box:hover > .top-btn-container {
+    @apply block;
+}
+
+.box:hover > .box-name {
+    @apply hidden;
+}
+
+.unmuted {
+    @apply outline outline-4 outline-green-500;
+}
+
+.expanded {
+    @apply fixed inset-0 z-30 box-border h-full w-full overflow-hidden;
+}
+
+.embed-container {
+    @apply relative max-w-full overflow-hidden rounded-lg bg-slate-700;
+    width: 290px;
+    height: 150px;
+}
