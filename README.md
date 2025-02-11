@@ -8,4 +8,5 @@ It provides usefull features:
 
 - Audio VU meter, which shows audio levels on the right side.
 - Sets lowest quality for all playing YouTube videos.
+- You can monitor multiple Zooms using the Screen Share.
 - And others!
