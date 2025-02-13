@@ -21,6 +21,15 @@ function refreshBox(e) {
     );
 }
 
+function muteOthers(e) {
+    const box = e.currentTarget.parentElement.parentElement;
+    getBoxes().forEach((b) => {
+        if (b !== box && b.classList.contains('unmuted')) {
+            b.querySelector('.mute-btn').click();
+        }
+    });
+}
+
 function createBox(name, type, value) {
     const id = generateUUID();
     const box = document.createElement('div');
@@ -48,6 +57,7 @@ function createBox(name, type, value) {
 
     box.querySelector('.expand-btn').onclick = expandBox;
     box.querySelector('.refresh-btn').onclick = refreshBox;
+    box.querySelector('.mute-btn').ondblclick = muteOthers;
 
     box.appendChild(getPlayer(type, value, id));
     return box;
