@@ -70,7 +70,7 @@ function createRow(name, type, value) {
         (async () => {
             window.mics = await getAvailableMics();
             div.parentElement.replaceChild(
-                createRow(rowNameInput.value, rowTypeInput.value, rowValueInput.value),
+                createRow(rowNameInput.value, rowTypeInput.value, value),
                 div,
             );
         })();
