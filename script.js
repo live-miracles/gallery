@@ -4,9 +4,10 @@ import {
     setInputValue,
     updateUrlParams,
     updateGalleryUrlInput,
+    parseNumbers,
 } from './tools.js';
-import { addBox } from './box.js';
-import { addRow } from './row.js';
+import { addBox, getBoxes } from './box.js';
+import { addRow, updateRowNumbers } from './row.js';
 
 function initRows() {
     document.getElementById('data-rows').innerHTML = '';
@@ -22,6 +23,7 @@ function initRows() {
 function updateRows() {
     updateUrlParams();
     updateBoxes();
+    updateRowNumbers();
 }
 
 function updateBoxes() {
@@ -51,10 +53,50 @@ function showElements() {
     });
 }
 
+let rotationInterval = null;
+function muteRotation() {
+    const toggleElem = document.getElementById('mute-rotation');
+    const checked = toggleElem.checked;
+    if (!checked) {
+        clearInterval(rotationInterval);
+        return;
+    }
+    const allBoxes = getBoxes();
+    const boxesElem = document.getElementById('rotation-boxes');
+    const rotationBoxes = parseNumbers(boxesElem.value);
+    const boxes =
+        boxesElem.value === ''
+            ? allBoxes
+            : rotationBoxes.map((i) => allBoxes[i - 1]).filter(Boolean);
+    if (boxes.length < 2) {
+        setTimeout(() => toggleElem.click(), 350);
+        boxesElem.classList.add('border-error');
+        return;
+    }
+    boxesElem.classList.remove('border-error');
+
+    const timeElem = document.getElementById('rotation-time');
+    const time = parseInt(timeElem.value);
+    if (isNaN(time) || time <= 0) {
+        setTimeout(() => toggleElem.click(), 350);
+        timeElem.classList.add('border-error');
+        return;
+    }
+    timeElem.classList.remove('border-error');
+
+    let i = 0;
+    rotationInterval = setInterval(() => {
+        const box = boxes[i];
+        i = (i + 1) % boxes.length;
+        box.querySelector('.solo-btn').click();
+    }, time * 1000);
+}
+
 (() => {
     updateGalleryUrlInput();
     setInputElements();
     window.mics = [];
+
     initRows();
     updateBoxes();
     showElements();
@@ -74,11 +116,15 @@ function showElements() {
 
     document.getElementById('add-data-row').addEventListener('click', () => addRow());
     document.getElementById('update-rows').addEventListener('click', () => updateRows());
+    document.getElementById('mute-rotation').addEventListener('click', () => muteRotation());
+    document.getElementById('mute-rotation').click();
+    document.getElementById('mute-rotation').click();
 
     const dataRows = document.getElementById('data-rows');
     new Sortable(dataRows, {
         animation: 150,
         handle: '.handle', // Draggable by the entire row
         ghostClass: 'bg-base-300', // Adds a class for the dragged item
+        onSort: updateRowNumbers,
     });
 })();

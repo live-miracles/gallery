@@ -60,7 +60,7 @@ function parseDocumentConfig() {
         } else if (input.type === 'text') {
             params.append('__' + input.id, input.value);
         } else {
-            conole.error('unexpected type: ' + input.type);
+            console.error('unexpected type: ' + input.type);
         }
     });
     return params;
@@ -126,6 +126,14 @@ async function getAvailableMics() {
     }
 }
 
+function parseNumbers(str) {
+    return str
+        .split(' ')
+        .map((num) => num.trim())
+        .filter((num) => num !== '')
+        .map((num) => parseInt(num));
+}
+
 export {
     getRowName,
     getRowType,
@@ -139,4 +147,5 @@ export {
     extractYouTubeId,
     updateGalleryUrlInput,
     getAvailableMics,
+    parseNumbers,
 };

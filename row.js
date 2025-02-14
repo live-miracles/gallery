@@ -1,5 +1,4 @@
 import {
-    getBoxUrlParams,
     updateUrlParams,
     extractYouTubeId,
     getRowName,
@@ -7,14 +6,13 @@ import {
     getRowValue,
     getAvailableMics,
 } from './tools.js';
-import { createBox, addBox, getBoxes } from './box.js';
+import { createBox, addBox, getBoxes, updateBoxNumbers } from './box.js';
 
 function getRowNumber(row) {
-    const siblings = Array.from(row.parentNode.children);
-    return siblings.indexOf(row) + 1;
+    return parseInt(row.querySelector('.row-number').textContent);
 }
 
-function createRow(name, type, value) {
+function createRow(name, type, value, number = '') {
     const div = document.createElement('div');
     div.className = 'row flex items-center gap-1 rounded';
 
@@ -22,6 +20,7 @@ function createRow(name, type, value) {
         <span class="handle badge cursor-grab">
             <svg class="fill-current w-3 h-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z"/></svg>
         </span>
+        <span class="row-number badge badge-neutral w-9 min-w-9">${number}</span>
         <input type="text" placeholder="Name" value="${name}" class="row-name input input-xs input-bordered w-36 ml-0" />
         <select class="row-type select select-bordered select-xs w-36">
           <option value="YT" ${type === 'YT' ? 'selected' : ''}>YT (YouTube)</option>
@@ -53,8 +52,7 @@ function createRow(name, type, value) {
 
         <button class="close-btn btn btn-xs btn-error">
           <svg class="fill-current w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>
-        </button>
-    `;
+        </button>`;
 
     const rowNameInput = div.querySelector('.row-name');
     const rowTypeInput = div.querySelector('.row-type');
@@ -63,16 +61,20 @@ function createRow(name, type, value) {
     const resetBtn = div.querySelector('.reset-btn');
 
     rowTypeInput.onchange = (e) => {
-        div.parentElement.replaceChild(createRow(rowNameInput.value, rowTypeInput.value, ''), div);
+        const newRow = createRow(rowNameInput.value, rowTypeInput.value, '', getRowNumber(div));
+        div.parentElement.replaceChild(newRow, div);
     };
 
     if (type === 'SS' && window.mics.length === 0) {
         (async () => {
             window.mics = await getAvailableMics();
-            div.parentElement.replaceChild(
-                createRow(rowNameInput.value, rowTypeInput.value, value),
-                div,
+            const newRow = createRow(
+                rowNameInput.value,
+                rowTypeInput.value,
+                value,
+                getRowNumber(div),
             );
+            div.parentElement.replaceChild(newRow, div);
         })();
     }
 
@@ -86,12 +88,12 @@ function createRow(name, type, value) {
 
     closeBtn.onclick = (e) => {
         const row = e.currentTarget.parentElement;
-        const prev = row.previousElementSibling;
-        const next = row.nextElementSibling;
         row.parentElement.removeChild(row);
 
+        updateRowNumbers();
         updateUrlParams();
     };
+
     resetBtn.onclick = (e) => {
         const row = e.currentTarget.parentElement;
         const boxLength = getBoxes().length;
@@ -106,6 +108,7 @@ function createRow(name, type, value) {
         if (rowIndex <= boxLength) {
             resetBox(row);
         }
+        updateBoxNumbers();
     };
 
     return div;
@@ -114,6 +117,7 @@ function createRow(name, type, value) {
 function addRow(name = '', type = 'YT', value = '') {
     const dataRows = document.getElementById('data-rows');
     dataRows.appendChild(createRow(name, type, value));
+    updateRowNumbers();
 }
 
 function resetBox(row) {
@@ -121,14 +125,18 @@ function resetBox(row) {
     const boxes = getBoxes();
     console.assert(number <= boxes.length);
     const box = boxes[number - 1];
-    box.parentElement.replaceChild(
-        createBox(getRowName(row), getRowType(row), getRowValue(row)),
-        box,
-    );
+    const newBox = createBox(getRowName(row), getRowType(row), getRowValue(row));
+    box.parentElement.replaceChild(newBox, box);
 }
 
 function getRows() {
     return document.getElementById('data-rows').querySelectorAll('.row');
 }
 
-export { addRow };
+function updateRowNumbers() {
+    document.querySelectorAll('.row').forEach((row, i) => {
+        row.querySelector('.row-number').textContent = i + 1;
+    });
+}
+
+export { addRow, updateRowNumbers };
