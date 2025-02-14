@@ -84,7 +84,8 @@ function muteRotation() {
     }
     timeElem.classList.remove('border-error');
 
-    let i = 0;
+    let i = 1;
+    boxes[0].querySelector('.solo-btn').click();
     rotationInterval = setInterval(() => {
         const box = boxes[i];
         i = (i + 1) % boxes.length;
@@ -114,11 +115,15 @@ function muteRotation() {
         window.location.href = galleryUrl.value;
     });
 
-    document.getElementById('add-data-row').addEventListener('click', () => addRow());
-    document.getElementById('update-rows').addEventListener('click', () => updateRows());
-    document.getElementById('mute-rotation').addEventListener('click', () => muteRotation());
-    document.getElementById('mute-rotation').click();
-    document.getElementById('mute-rotation').click();
+    document.getElementById('add-data-row').addEventListener('click', addRow);
+    document.getElementById('update-rows').addEventListener('click', updateRows);
+
+    const muteRotationToggle = document.getElementById('mute-rotation');
+    muteRotationToggle.addEventListener('click', muteRotation);
+    if (muteRotationToggle.checked) {
+        muteRotationToggle.click();
+        muteRotationToggle.click();
+    }
 
     const dataRows = document.getElementById('data-rows');
     new Sortable(dataRows, {
