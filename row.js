@@ -75,6 +75,7 @@ function createRow(name, type, value, number = '') {
                 getRowNumber(div),
             );
             div.parentElement.replaceChild(newRow, div);
+            updateUrlParams();
         })();
     }
 
@@ -109,6 +110,7 @@ function createRow(name, type, value, number = '') {
             resetBox(row);
         }
         updateBoxNumbers();
+        updateUrlParams();
     };
 
     return div;
