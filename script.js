@@ -115,7 +115,7 @@ function muteRotation() {
         window.location.href = galleryUrl.value;
     });
 
-    document.getElementById('add-data-row').addEventListener('click', addRow);
+    document.getElementById('add-data-row').addEventListener('click', () => addRow());
     document.getElementById('update-rows').addEventListener('click', updateRows);
 
     const muteRotationToggle = document.getElementById('mute-rotation');
