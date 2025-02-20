@@ -5,6 +5,7 @@ import {
     updateUrlParams,
     updateGalleryUrlInput,
     parseNumbers,
+    parseSheetBuffer,
 } from './tools.js';
 import { addBox, getBoxes } from './box.js';
 import { addRow, updateRowNumbers } from './row.js';
@@ -96,24 +97,36 @@ function muteRotation() {
 (() => {
     updateGalleryUrlInput();
     setInputElements();
+
     window.mics = [];
-
     initRows();
+
     updateBoxes();
+    document
+        .querySelectorAll('.url-param')
+        .forEach((elem) => elem.addEventListener('change', updateUrlParams));
+
     showElements();
-
-    document.querySelectorAll('.url-param').forEach((input) => {
-        input.addEventListener('change', updateUrlParams);
-    });
-
     document
         .querySelectorAll('.show-toggle')
         .forEach((elem) => elem.addEventListener('click', showElements));
 
+    const galleryUrl = document.getElementById('gallery-url');
     document.getElementById('update-gallery-url').addEventListener('click', () => {
-        const galleryUrl = document.getElementById('gallery-url');
         window.location.href = galleryUrl.value;
     });
+    galleryUrl.onpaste = (e) => {
+        e.preventDefault();
+        const base = window.location.origin + window.location.pathname;
+        const paste = e.clipboardData.getData('text').trim();
+        if (paste.startsWith(base)) {
+            e.target.value = paste;
+        } else {
+            const rows = parseSheetBuffer(paste);
+            const pairs = rows.map((r) => r.key + '=YT' + r.value);
+            e.target.value = base + '?' + pairs.join('&');
+        }
+    };
 
     document.getElementById('add-data-row').addEventListener('click', () => addRow());
     document.getElementById('update-rows').addEventListener('click', updateRows);

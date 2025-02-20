@@ -113,6 +113,29 @@ function extractYouTubeId(str) {
     }
 }
 
+function parseSheetBuffer(str) {
+    const lines = str.split('\n').filter((line) => line.trim() !== '');
+    const result = [];
+
+    for (const line of lines) {
+        let parts = line.split('\t');
+        if (parts.length !== 2) continue;
+
+        let [first, second] = parts;
+
+        first = extractYouTubeId(first);
+        second = extractYouTubeId(second);
+
+        if (/^[a-zA-Z0-9-_]{11}$/.test(second)) {
+            result.push({ key: first, value: second });
+        } else {
+            result.push({ key: second, value: first });
+        }
+    }
+
+    return result;
+}
+
 async function getAvailableMics() {
     try {
         await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -145,6 +168,7 @@ export {
     updateUrlParams,
     generateUUID,
     extractYouTubeId,
+    parseSheetBuffer,
     updateGalleryUrlInput,
     getAvailableMics,
     parseNumbers,
