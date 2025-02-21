@@ -111,14 +111,15 @@ function muteRotation() {
         .querySelectorAll('.show-toggle')
         .forEach((elem) => elem.addEventListener('click', showElements));
 
+    const base = window.location.origin + window.location.pathname;
     const galleryUrl = document.getElementById('gallery-url');
     const updateGalleryUrl = document.getElementById('update-gallery-url');
     updateGalleryUrl.addEventListener('click', () => {
-        window.location.href = galleryUrl.value;
+        let url = galleryUrl.value.trim();
+        window.location.href = url === '' ? base : url;
     });
     galleryUrl.onpaste = (e) => {
         e.preventDefault();
-        const base = window.location.origin + window.location.pathname;
         const paste = e.clipboardData.getData('text').trim();
         if (paste.startsWith(base)) {
             e.target.value = paste;

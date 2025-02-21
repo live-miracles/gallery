@@ -113,22 +113,31 @@ function extractYouTubeId(str) {
     }
 }
 
+function isValidYouTubeId(str) {
+    return /^[a-zA-Z0-9-_]{11}$/.test(str);
+}
+
 function parseSheetBuffer(str) {
     const lines = str.split('\n').filter((line) => line.trim() !== '');
     const result = [];
 
     for (const line of lines) {
         let parts = line.split('\t');
+        if (parts.length === 1) {
+            parts.push('');
+        }
         if (parts.length !== 2) continue;
 
         let [first, second] = parts;
 
-        first = extractYouTubeId(first);
-        second = extractYouTubeId(second);
+        first = extractYouTubeId(first.trim());
+        second = extractYouTubeId(second.trim());
 
-        if (/^[a-zA-Z0-9-_]{11}$/.test(second)) {
+        if (isValidYouTubeId(second)) {
+            first = first === '' ? String(result.length + 1) : first;
             result.push({ key: first, value: second });
-        } else {
+        } else if (isValidYouTubeId(first)) {
+            second = second === '' ? String(result.length + 1) : second;
             result.push({ key: second, value: first });
         }
     }
