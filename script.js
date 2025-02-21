@@ -112,7 +112,8 @@ function muteRotation() {
         .forEach((elem) => elem.addEventListener('click', showElements));
 
     const galleryUrl = document.getElementById('gallery-url');
-    document.getElementById('update-gallery-url').addEventListener('click', () => {
+    const updateGalleryUrl = document.getElementById('update-gallery-url');
+    updateGalleryUrl.addEventListener('click', () => {
         window.location.href = galleryUrl.value;
     });
     galleryUrl.onpaste = (e) => {
@@ -127,6 +128,11 @@ function muteRotation() {
             e.target.value = base + '?' + pairs.join('&');
         }
     };
+    galleryUrl.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            updateGalleryUrl.click();
+        }
+    });
 
     document.getElementById('add-data-row').addEventListener('click', () => addRow());
     document.getElementById('update-rows').addEventListener('click', updateRows);

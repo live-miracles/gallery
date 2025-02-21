@@ -27,7 +27,6 @@
       <div class="flex-none">
         <ul class="menu menu-horizontal px-1">
           <li><a href="/">Home</a></li>
-          <li><a href="#docs">Docs</a></li>
           <li>
             <a href="/gallery-ext/" target="_blank" t>Extension</a>
           </li>
@@ -53,7 +52,7 @@
       <div>
         <label class="relative inline-flex cursor-pointer items-center">
           <input type="checkbox" id="show-focus" class="show-toggle url-param toggle toggle-secondary m-0" checked />
-          <span class="text-md ms-3">Focus mode</span>
+          <span class="text-md ms-3">Show everything</span>
         </label>
       </div>
 
@@ -100,7 +99,7 @@
       <button id="update-rows" class="btn btn-outline btn-secondary btn-xs mt-3">Update</button>
     </div>
 
-    <div id="docs" class="divider focus mx-auto my-10 w-[750px]">Documentation</div>
+    <div class="divider focus mx-auto my-10 w-[750px]">Documentation</div>
 
     <div class="prose focus m-auto w-[760px] max-w-[750px] px-1">
       <p>Please use the latest Chrome browser and install the extension.</p>
@@ -127,6 +126,15 @@
 
       This is only needed if we are using Screen Share with an audio input. Audio from YT, JW, etc. will work fine without disabling the flags.
 
+      <h3>Tips</h3>
+      <ul>
+        <li>You can paste a YouTube URL into the value field and it will automatically extract the video ID.</li>
+        <li>
+          You can copy several YouTube links with names from a Google Sheet into the URL field in the Control section and it will automatically add
+          them all.
+        </li>
+      </ul>
+
       <h3>Value</h3>
       <ul>
         <li>
@@ -150,7 +158,11 @@
 
     <footer class="footer footer-center focus mt-10 bg-base-300 p-4 text-base-content">
       <aside>
-        <p>Copyright © 2024 - All right reserved by LSM</p>
+        <p>Check out our <a class="link" href="/">homepage</a> for more streaming tools (=ↀωↀ=).</p>
+        <p>
+          For any bug / feature requests, please open an issue in our
+          <a class="link" href="https://github.com/isha-live/gallery/" target="_blank">GitHub</a> repo (ʃƪ˶˘ ﻬ ˘˶).
+        </p>
       </aside>
     </footer>
   </body>
