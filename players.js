@@ -19,7 +19,7 @@ function getPlayer(type, value, id) {
     } else if (type === 'FB') {
         return getFacebookPlayer(value, urlParams);
     } else {
-        return getCustomPlayer('./404.html?description=Invalid video type');
+        return getCustomPlayer(type + value);
     }
 }
 
