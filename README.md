@@ -1,6 +1,6 @@
 # Live Streaming Gallery
 
-<img width="700" alt="Live Streaming Gallery" src="https://github.com/user-attachments/assets/c0d302e0-d959-4d95-9b85-f93a4c9b2fc5">
+<img width="700" alt="Live Streaming Gallery" src="https://github.com/user-attachments/assets/d1a87eb1-1881-4400-912d-af3303c5e3f9">
 
 Here you can monitor multiple YouTube, JW, Facebook, and other live broadcasts simultaneously.
 
