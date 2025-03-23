@@ -115,8 +115,13 @@ function muteRotation() {
     const galleryUrl = document.getElementById('gallery-url');
     const updateGalleryUrl = document.getElementById('update-gallery-url');
     updateGalleryUrl.addEventListener('click', () => {
-        let url = galleryUrl.value.trim();
+        const url = galleryUrl.value.trim();
         window.location.href = url === '' ? base : url;
+    });
+    const lastGalleryUrl = document.getElementById('last-gallery-url');
+    lastGalleryUrl.addEventListener('click', () => {
+        const lastUrl = localStorage.getItem('galleryUrl');
+        window.location.href = lastUrl;
     });
     galleryUrl.onpaste = (e) => {
         e.preventDefault();

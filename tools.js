@@ -81,6 +81,9 @@ function updateUrlParams() {
 
 function updateGalleryUrlInput() {
     document.getElementById('gallery-url').value = window.location.href;
+    if (window.location.search !== '') {
+        localStorage.setItem('galleryUrl', window.location.href);
+    }
 }
 
 // ===== General Purpose Utils =====

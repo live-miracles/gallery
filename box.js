@@ -60,7 +60,7 @@ function createBox(name, type, value) {
           </button>
       </div>
 
-      <div class="box-name badge badge-neutral absolute left-1/2 transform -translate-x-1/2 bottom-1 z-10"><span class="opacity-100">${name}</span></div>`;
+      <div class="box-name badge badge-neutral absolute left-1/2 transform -translate-x-1/2 bottom-1 z-10"><span class="opacity-100 whitespace-nowrap">${name}</span></div>`;
 
     box.querySelector('.expand-btn').onclick = expandBox;
     box.querySelector('.refresh-btn').onclick = refreshBox;
