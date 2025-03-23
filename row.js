@@ -111,6 +111,8 @@ function createRow(name, type, value, number = '') {
         }
         updateBoxNumbers();
         updateUrlParams();
+
+        document.getElementById('init-unmute').click();
     };
 
     return div;
