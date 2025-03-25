@@ -1,6 +1,8 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+@plugin "@tailwindcss/typography";
+@plugin "daisyui" {
+    themes: night;
+}
 
 @keyframes fadeInRight {
     from {
@@ -22,7 +24,7 @@ input {
 }
 
 iframe {
-    @apply absolute left-0 top-0 h-full w-full bg-neutral;
+    @apply bg-neutral absolute top-0 left-0 h-full w-full;
     color-scheme: light;
     width: 160% !important;
     height: 160% !important;
