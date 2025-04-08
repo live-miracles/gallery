@@ -14,18 +14,19 @@ function getRowNumber(row) {
 
 function createRow(name, type, value, number = '') {
     const div = document.createElement('div');
-    div.className = 'row flex items-center gap-1 rounded';
+    div.className = 'row flex items-center gap-1 rounded-xs';
 
     div.innerHTML = `
         <span class="handle badge cursor-grab">
             <svg class="fill-current w-3 h-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z"/></svg>
         </span>
         <span class="row-number badge badge-neutral w-9 min-w-9">${number}</span>
-        <input type="text" placeholder="Name" value="${name}" class="row-name input input-xs input-bordered w-36 ml-0" />
-        <select class="row-type select select-bordered select-xs w-36">
+        <input type="text" placeholder="Name" value="${name}" class="row-name input input-xs w-36 ml-0" />
+        <select class="row-type select select-xs w-36">
           <option value="YT" ${type === 'YT' ? 'selected' : ''}>YT (YouTube)</option>
           <option value="YN" ${type === 'YN' ? 'selected' : ''}>YN (YouTube with enhanced privacy)</option>
           <option value="JW" ${type === 'JW' ? 'selected' : ''}>JW (JW Player)</option>
+          <option value="VC" ${type === 'VC' ? 'selected' : ''}>VC (VdoCipher Player)</option>
           <option value="SS" ${type === 'SS' ? 'selected' : ''}>SS (Screen Share)</option>
           <option value="FB" ${type === 'FB' ? 'selected' : ''}>FB (Facebook)</option>
           <option value="CU" ${type === 'CU' ? 'selected' : ''}>CU (Custom)</option>
@@ -33,7 +34,7 @@ function createRow(name, type, value, number = '') {
         ${
             type === 'SS'
                 ? `
-            <select class="row-value mic-select row-type select select-bordered select-xs mx-1 flex-1">
+            <select class="row-value mic-select row-type select select-xs mx-1 flex-1">
                 <option value="" disabled>Select Microphone</option>
                 ${window.mics.map(
                     (mic) => `
@@ -44,7 +45,7 @@ function createRow(name, type, value, number = '') {
                     </option>`,
                 )}
             </select>`
-                : `<input type="text" placeholder="ID" value="${value}" class="row-value input input-xs input-bordered flex-1" />`
+                : `<input type="text" placeholder="ID" value="${value}" class="row-value input input-xs flex-1" />`
         }
         <button class="reset-btn btn btn-xs btn-secondary">
           <svg class="fill-current w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M386.3 160L336 160c-17.7 0-32 14.3-32 32s14.3 32 32 32l128 0c17.7 0 32-14.3 32-32l0-128c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 51.2L414.4 97.6c-87.5-87.5-229.3-87.5-316.8 0s-87.5 229.3 0 316.8s229.3 87.5 316.8 0c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0c-62.5 62.5-163.8 62.5-226.3 0s-62.5-163.8 0-226.3s163.8-62.5 226.3 0L386.3 160z"/></svg>

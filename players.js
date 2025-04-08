@@ -16,6 +16,8 @@ function getPlayer(type, value, id) {
         return getYouTubePlayer(value, urlParams, false);
     } else if (type === 'JW') {
         return getJWPlayer(value, urlParams);
+    } else if (type === 'VC') {
+        return getVCPlayer(value, urlParams);
     } else if (type === 'FB') {
         return getFacebookPlayer(value, urlParams);
     } else {
@@ -56,6 +58,17 @@ function getJWPlayer(value, urlParams) {
     iframe.title = 'JWP';
     iframe.seamless = 'seamless';
     iframe.scrolling = 'no';
+    iframe.frameBorder = '0';
+    iframe.allow = 'encrypted-media; autoplay; fullscreen; clipboard-read; clipboard-write;';
+    iframe.allowfullscreen = true;
+    return iframe;
+}
+
+function getVCPlayer(value, urlParams) {
+    const iframe = document.createElement('iframe');
+    iframe.className = 'player';
+    iframe.src = `https://player.vdocipher.com/live?liveId=${value}&preview=true?autoplay=1&${urlParams}`;
+    iframe.title = 'VdoCipher Player';
     iframe.frameBorder = '0';
     iframe.allow = 'encrypted-media; autoplay; fullscreen; clipboard-read; clipboard-write;';
     iframe.allowfullscreen = true;
