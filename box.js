@@ -38,7 +38,8 @@ function createBox(name, type, value) {
     box.setAttribute('data-type', type);
     box.setAttribute('data-value', value);
     box.setAttribute('data-id', id);
-    box.className = 'box relative w-[279px] h-[150px] overflow-hidden rounded-lg bg-slate-700 m-1';
+    box.className =
+        'box relative w-[279px] h-[150px] overflow-hidden rounded-lg bg-slate-700 m-1 border border-neutral';
     box.innerHTML = `
       <div class="top-btn-container absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 hidden w-full text-center">
           <button class="expand-btn btn btn-circle btn-xs">
