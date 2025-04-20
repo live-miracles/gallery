@@ -12,21 +12,12 @@
     --color-slate-700: oklch(37.2% 0.044 257.287);
     --color-black: #000;
     --spacing: 0.25rem;
-    --container-3xl: 48rem;
-    --text-xs: 0.75rem;
-    --text-xs--line-height: calc(1 / 0.75);
     --text-sm: 0.875rem;
     --text-sm--line-height: calc(1.25 / 0.875);
-    --text-lg: 1.125rem;
-    --text-lg--line-height: calc(1.75 / 1.125);
     --text-xl: 1.25rem;
     --text-xl--line-height: calc(1.75 / 1.25);
-    --text-5xl: 3rem;
-    --text-5xl--line-height: 1;
-    --font-weight-semibold: 600;
     --radius-xs: 0.125rem;
     --radius-lg: 0.5rem;
-    --radius-3xl: 1.5rem;
     --default-transition-duration: 150ms;
     --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     --default-font-family: var(--font-sans);
@@ -1986,6 +1977,10 @@
   .badge-neutral {
     --badge-color: var(--color-neutral);
     --badge-fg: var(--color-neutral-content);
+  }
+  .badge-success {
+    --badge-color: var(--color-success);
+    --badge-fg: var(--color-success-content);
   }
   .btn-error {
     --btn-color: var(--color-error);
