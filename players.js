@@ -8,6 +8,8 @@ function getPlayer(type, value, id) {
 
     if (type === 'SS') {
         return getCustomPlayer('./screen-share.html?' + urlParams);
+    } else if (type === 'CU' && value.endsWith('.m3u8')) {
+        return getCustomPlayer(`./m3u8-player.html?` + urlParams);
     } else if (type === 'CU' || value === '') {
         return getCustomPlayer(value);
     } else if (type === 'YT') {
@@ -79,7 +81,7 @@ function getFacebookPlayer(value, urlParams) {
     const iframe = document.createElement('iframe');
     iframe.src = `https://www.facebook.com/video/embed?video_id=${value}&${urlParams}`;
     iframe.className = 'player fb-video';
-    iframe.frameborder = '0';
+    iframe.frameBorder = '0';
     iframe.allow = 'autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share';
     iframe.allowfullscreen = 'true';
     iframe.setAttribute('allowFullScreen', 'true');

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en" data-theme="night">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Screen Share</title>
+    <link rel="stylesheet" href="./output.css" />
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  </head>
+  <body class="">
+    <video id="video" controls autoplay class="h-screen w-screen"></video>
+
+    <script>
+      const video = document.getElementById('video');
+
+      const searchParams = new URLSearchParams(window.location.search);
+      const videoSrc = searchParams.get('value');
+
+      if (!videoSrc) {
+        alert('No video source provided. Please add "?value=your_video_source" to the URL.');
+      } else if (Hls.isSupported()) {
+        const hls = new Hls();
+        hls.loadSource(videoSrc);
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MANIFEST_PARSED, function () {
+          video.play();
+        });
+      } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        // For Safari and iOS native support
+        video.src = videoSrc;
+        video.addEventListener('loadedmetadata', function () {
+          video.play();
+        });
+      } else {
+        alert('Your browser does not support HLS playback.');
+      }
+    </script>
+  </body>
+</html>
