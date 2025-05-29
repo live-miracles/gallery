@@ -15,15 +15,7 @@
     }
 }
 
-svg {
-    fill: currentColor;
-}
-
-input {
-    @apply m-1 bg-transparent text-sm text-slate-50;
-}
-
-iframe {
+.player {
     @apply bg-neutral absolute top-0 left-0 h-full w-full;
     color-scheme: light;
     width: 160% !important;
@@ -38,11 +30,7 @@ iframe {
     animation: fadeInRight 1s ease-out;
 }
 
-.box:hover > .top-btn-container {
-    @apply block;
-}
-
-.box:hover > .box-name {
+.box-controls:hover > .box-name-container {
     @apply hidden;
 }
 
@@ -52,10 +40,4 @@ iframe {
 
 .expanded {
     @apply fixed inset-0 z-30 m-auto box-border h-[95%] w-[95%];
-}
-
-.embed-container {
-    @apply relative max-w-full overflow-hidden rounded-lg bg-slate-700;
-    width: 290px;
-    height: 150px;
 }

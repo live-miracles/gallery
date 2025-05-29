@@ -12,15 +12,16 @@
   <body class="bg-base-100 text-base-content">
     <div class="flex flex-col items-center">
       <div class="flex w-full flex-wrap" id="gallery"></div>
+      <button id="add-box-btn" class="btn btn-active btn-secondary btn-sm mt-2">Add</button>
     </div>
 
     <div class="prose rounded-box border-error text-error m-3 mx-auto border-2 p-2" id="outdated-extension-warning" style="display: none">
       <b>Warning:</b> You're using an outdated Chrome extension version "<span id="ext-version"></span>". Please
-      <a class="link" href="/gallery-ext/#update">update</a> it to the latest version "<span id="gal-version">3.2.0</span>", as some features might
+      <a class="link" href="/gallery-ext/#update">update</a> it to the latest version "<span id="gal-version">4.0.0</span>", as some features might
       not work properly.
     </div>
 
-    <div class="navbar focus bg-base-100">
+    <div class="navbar bg-base-100">
       <div class="flex-1">
         <a class="btn btn-ghost text-xl" href="/">Gallery</a>
       </div>
@@ -35,8 +36,8 @@
       </div>
     </div>
 
-    <div class="m-auto mt-10 w-[750px] px-1" style="display: none" id="controls">
-      <div class="focus mb-4 flex items-center gap-1">
+    <div class="m-auto mt-5 w-[750px] px-1" style="display: none" id="controls">
+      <div class="mb-4 flex items-center gap-1">
         <input id="gallery-url" type="text" placeholder="URL" class="input input-xs ml-0 flex-1" />
 
         <button id="update-gallery-url" class="btn btn-secondary btn-xs">
@@ -48,28 +49,21 @@
         <button id="last-gallery-url" class="btn btn-secondary btn-xs">last</button>
       </div>
 
-      <div class="divider focus mx-auto mt-10 w-[750px]">Controls</div>
+      <div class="divider mx-auto mt-10 w-[750px]">Controls</div>
 
-      <div>
-        <label class="relative inline-flex cursor-pointer items-center">
-          <input type="checkbox" id="show-focus" class="show-toggle url-param toggle toggle-secondary m-0" checked />
-          <span class="text-md ms-3">Show everything</span>
-        </label>
-      </div>
-
-      <div class="focus">
+      <div class="s">
         <label class="relative inline-flex cursor-pointer items-center">
           <input type="checkbox" id="audioLevels" class="url-param toggle toggle-secondary m-0" checked />
           <span class="text-md ms-3">Draw audio levels</span>
         </label>
       </div>
-      <div class="focus">
+      <div>
         <label class="relative inline-flex cursor-pointer items-center">
           <input type="checkbox" id="noAudioBlink" class="url-param toggle toggle-secondary m-0" disabled />
           <span class="text-md ms-3">Blink if no audio for over 5 seconds</span>
         </label>
       </div>
-      <div class="focus mb-4">
+      <div class="mb-4">
         <label class="relative inline-flex cursor-pointer items-center">
           <input type="checkbox" id="mute-rotation" class="url-param toggle toggle-secondary m-0" />
           <span class="text-md ms-3 whitespace-nowrap">Auto unmute boxes one by one</span>
@@ -81,13 +75,13 @@
           <input type="text" id="rotation-time" class="url-param input input-xs mx-0 my-0 w-12" placeholder="sec" value="60" />
         </label>
       </div>
-      <div class="focus">
+      <div>
         <label class="relative inline-flex cursor-pointer items-center">
           <input type="checkbox" id="autoLive" class="url-param toggle toggle-secondary m-0" checked />
           <span class="text-md ms-3">YouTube: automatically switch to LIVE</span>
         </label>
       </div>
-      <div class="focus mb-4">
+      <div class="mb-4">
         <label class="relative inline-flex cursor-pointer items-center">
           <button id="setQuality" class="btn btn-outline btn-secondary btn-xs">Lowest Quality</button>
           <span class="text-md ms-3">YouTube: Select the lowest quality (resolution) for all videos</span>
@@ -95,19 +89,9 @@
       </div>
     </div>
 
-    <div class="divider focus mx-auto my-10 w-[750px]">Data Rows</div>
+    <div class="divider mx-auto my-10 w-[750px]">Documentation</div>
 
-    <div id="data-rows" class="focus m-auto w-[750px] px-1"></div>
-
-    <div class="focus m-auto w-[750px] px-1">
-      <button id="add-data-row" class="btn btn-outline btn-secondary btn-xs mt-3">Add</button>
-      <button id="update-rows" class="btn btn-outline btn-secondary btn-xs mt-3">Update</button>
-      <button id="init-unmute" class="hidden"></button>
-    </div>
-
-    <div class="divider focus mx-auto my-10 w-[750px]">Documentation</div>
-
-    <div class="prose focus m-auto w-[760px] max-w-[750px] px-1">
+    <div class="prose m-auto w-[760px] max-w-[750px] px-1">
       <p>Please use the latest Chrome browser and install the extension.</p>
 
       <h3>
@@ -160,7 +144,7 @@
       </ul>
     </div>
 
-    <footer class="footer footer-center focus bg-base-300 text-base-content mt-10 p-4">
+    <footer class="footer footer-center bg-base-300 text-base-content mt-10 p-4">
       <aside>
         <p>
           For any bug / feature requests, please open an issue in our

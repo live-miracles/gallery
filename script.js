@@ -7,25 +7,7 @@ import {
     parseNumbers,
     parseSheetBuffer,
 } from './tools.js';
-import { addBox, getBoxes } from './box.js';
-import { addRow, updateRowNumbers } from './row.js';
-
-function initRows() {
-    document.getElementById('data-rows').innerHTML = '';
-    const urlParams = getBoxUrlParams();
-    if (urlParams.length === 0) {
-        addRow();
-    }
-    urlParams.forEach((param) => {
-        addRow(param.key, param.value.substring(0, 2), param.value.substring(2));
-    });
-}
-
-function updateRows() {
-    updateUrlParams();
-    updateBoxes();
-    updateRowNumbers();
-}
+import { addBox, getBoxes, updateBoxNumbers } from './box.js';
 
 function updateBoxes() {
     document.getElementById('gallery').innerHTML = '';
@@ -38,20 +20,6 @@ function updateBoxes() {
 function setInputElements() {
     const urlParams = getConfigUrlParams();
     urlParams.forEach((param) => setInputValue(param.key, param.value));
-}
-
-function showElements() {
-    document.querySelectorAll('.show-toggle').forEach((elem) => {
-        const name = elem.id.slice('show-'.length);
-        const show = elem.checked;
-        document.querySelectorAll('.' + name).forEach((e) => {
-            if (show) {
-                e.classList.remove('hidden');
-            } else {
-                e.classList.add('hidden');
-            }
-        });
-    });
 }
 
 let rotationInterval = null;
@@ -99,17 +67,13 @@ function muteRotation() {
     setInputElements();
 
     window.mics = [];
-    initRows();
 
     updateBoxes();
     document
         .querySelectorAll('.url-param')
         .forEach((elem) => elem.addEventListener('change', updateUrlParams));
 
-    showElements();
-    document
-        .querySelectorAll('.show-toggle')
-        .forEach((elem) => elem.addEventListener('click', showElements));
+    document.getElementById('add-box-btn').addEventListener('click', () => addBox());
 
     const base = window.location.origin + window.location.pathname;
     const galleryUrl = document.getElementById('gallery-url');
@@ -140,9 +104,6 @@ function muteRotation() {
         }
     });
 
-    document.getElementById('add-data-row').addEventListener('click', () => addRow());
-    document.getElementById('update-rows').addEventListener('click', updateRows);
-
     const muteRotationToggle = document.getElementById('mute-rotation');
     muteRotationToggle.addEventListener('click', muteRotation);
     if (muteRotationToggle.checked) {
@@ -150,11 +111,10 @@ function muteRotation() {
         muteRotationToggle.click();
     }
 
-    const dataRows = document.getElementById('data-rows');
-    new Sortable(dataRows, {
+    new Sortable(document.getElementById('gallery'), {
         animation: 150,
         handle: '.handle', // Draggable by the entire row
         ghostClass: 'bg-base-300', // Adds a class for the dragged item
-        onSort: updateRowNumbers,
+        onSort: updateBoxNumbers,
     });
 })();

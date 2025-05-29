@@ -1,16 +1,3 @@
-// ===== Row Utils =====
-function getRowName(row) {
-    return row.querySelector('.row-name').value;
-}
-
-function getRowType(row) {
-    return row.querySelector('.row-type').value;
-}
-
-function getRowValue(row) {
-    return row.querySelector('.row-value').value;
-}
-
 // ===== Document Config & URL Utils =====
 function setInputValue(id, value) {
     const input = document.getElementById(id, value);
@@ -34,7 +21,7 @@ function getBoxUrlParams() {
     const searchParams = new URLSearchParams(new URL(url).search);
     const params = [];
     searchParams.forEach(function (value, key) {
-        if (key === '' || key.startsWith('__')) return;
+        if (key.startsWith('__')) return;
         params.push({ key: key, value: value });
     });
     return params;
@@ -68,10 +55,9 @@ function parseDocumentConfig() {
 
 function updateUrlParams() {
     const rowParams = new URLSearchParams();
-    document.querySelectorAll('.row').forEach((row) => {
-        const key = getRowName(row);
-        const val = getRowType(row) + getRowValue(row);
-        if (key === '') return;
+    document.querySelectorAll('.box').forEach((box) => {
+        const key = box.getAttribute('data-name');
+        const val = box.getAttribute('data-type') + box.getAttribute('data-value');
         rowParams.append(key, val);
     });
     const configParams = parseDocumentConfig();
@@ -170,9 +156,6 @@ function parseNumbers(str) {
 }
 
 export {
-    getRowName,
-    getRowType,
-    getRowValue,
     getBoxUrlParams,
     setInputValue,
     getConfigUrlParams,
