@@ -44,7 +44,7 @@ function parseDocumentConfig() {
     document.querySelectorAll('.url-param').forEach((input) => {
         if (input.type === 'checkbox') {
             params.append('__' + input.id, input.checked ? '1' : '0');
-        } else if (input.type === 'text') {
+        } else if (input.type === 'text' || input.type === 'number') {
             params.append('__' + input.id, input.value);
         } else {
             console.error('unexpected type: ' + input.type);
