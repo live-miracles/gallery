@@ -139,7 +139,9 @@ async function getAvailableMics() {
         await navigator.mediaDevices.getUserMedia({ audio: true });
         const devices = await navigator.mediaDevices.enumerateDevices();
         const audioInputDevices = devices.filter((device) => device.kind === 'audioinput');
-        return audioInputDevices.sort((a, b) => a.label.localeCompare(b.label));
+        return audioInputDevices.sort((a, b) =>
+            a.label.localeCompare(b.label, undefined, { numeric: true, sensitivity: 'base' }),
+        );
     } catch (error) {
         console.error('Error accessing microphones:', error);
         alert('Could not access microphones. Please grant permissions.');
