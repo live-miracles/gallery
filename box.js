@@ -46,9 +46,9 @@ function muteOthers(e) {
 
 function createEditForm(name, type, value) {
     const div = document.createElement('div');
-    div.className = 'edit-form absolute z-20 text-center w-full hidden';
+    div.className = 'edit-form absolute z-20 text-center w-full hidden mt-2';
     div.innerHTML = `
-        <input type="text" placeholder="Name" value="${name}" class="form-name input input-xs w-48 m-1 mt-3" />
+        <input type="text" placeholder="Name" value="${name}" class="form-name input input-xs w-48 m-1 mt-1" />
         <select class="form-type select select-xs w-48 m-1">
           <option value="YT" ${type === 'YT' ? 'selected' : ''}>YT (YouTube)</option>
           <option value="YN" ${type === 'YN' ? 'selected' : ''}>YN (YouTube with enhanced privacy)</option>
@@ -167,8 +167,12 @@ function createBox(name, type, value) {
     box.querySelector('.close-btn').onclick = closeBox;
 
     const player = box.querySelector('.player-container');
-    player.appendChild(createEditForm(name, type, value));
     player.appendChild(getPlayer(type, value, id));
+    const editForm = createEditForm(name, type, value);
+    if (name === '' && value === '') {
+        editForm.classList.remove('hidden');
+    }
+    player.appendChild(editForm);
 
     return box;
 }

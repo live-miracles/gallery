@@ -15,6 +15,9 @@ function updateBoxes() {
     urlParams.forEach((param) => {
         addBox(param.key, param.value.substring(0, 2), param.value.substring(2));
     });
+    if (urlParams.length === 0) {
+        addBox();
+    }
 }
 
 function setInputElements() {
