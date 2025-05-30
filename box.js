@@ -1,5 +1,5 @@
 import { getPlayer } from './players.js';
-import { updateUrlParams, generateUUID, extractYouTubeId, getAvailableMics } from './tools.js';
+import { updateBoxesParam, generateUUID, extractYouTubeId, getAvailableMics } from './tools.js';
 
 // ===== Box Top Buttons =====
 function expandBox(e) {
@@ -31,7 +31,7 @@ function closeBox(e) {
     const box = e.target.closest('.box');
     box.parentElement.removeChild(box);
     updateBoxNumbers();
-    updateUrlParams();
+    updateBoxesParam();
 }
 
 function muteOthers(e) {
@@ -94,7 +94,6 @@ function createEditForm(name, type, value) {
             const newForm = createEditForm(nameInput.value, typeInput.value, value);
             newForm.classList.remove('hidden');
             div.parentElement.replaceChild(newForm, div);
-            updateUrlParams();
         })();
     }
 
@@ -121,7 +120,7 @@ function createEditForm(name, type, value) {
         box.querySelector('.box-name').innerText = nameInput.value;
         box.querySelector('.refresh-btn').click();
 
-        updateUrlParams();
+        updateBoxesParam();
     };
 
     return div;
@@ -203,7 +202,6 @@ function updateBoxNumbers() {
     getBoxes().forEach((box, i) => {
         box.querySelector('.box-number').textContent = i + 1;
     });
-    updateUrlParams();
 }
 
 export { createBox, addBox, getBoxes, muteBox, unmuteBox, updateBoxNumbers };

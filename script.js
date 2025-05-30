@@ -1,28 +1,26 @@
 import {
-    getBoxUrlParams,
-    getConfigUrlParams,
+    setDocumentUrlParams,
     setInputValue,
-    updateUrlParams,
+    updateUrlParam,
     updateGalleryUrlInput,
     parseNumbers,
     parseSheetBuffer,
 } from './tools.js';
 import { addBox, getBoxes, updateBoxNumbers } from './box.js';
 
-function updateBoxes() {
+function initBoxes() {
     document.getElementById('gallery').innerHTML = '';
-    const urlParams = getBoxUrlParams();
-    urlParams.forEach((param) => {
-        addBox(param.key, param.value.substring(0, 2), param.value.substring(2));
-    });
-    if (urlParams.length === 0) {
+
+    const params = new URLSearchParams(window.location.search);
+    const boxesParam = params.get('boxes') ? params.get('boxes') : '';
+    const boxes = boxesParam
+        .split(/(?<!\\)~/)
+        .filter(Boolean)
+        .map((str) => str.split('.', 3))
+        .forEach((param) => addBox(param[0], param[1], param[2].replaceAll('\\~', '~')));
+    if (boxesParam === '') {
         addBox();
     }
-}
-
-function setInputElements() {
-    const urlParams = getConfigUrlParams();
-    urlParams.forEach((param) => setInputValue(param.key, param.value));
 }
 
 function getRotationBoxes() {
@@ -57,14 +55,14 @@ function rotateAudio(index = 0, waitTime = -1) {
 
 (() => {
     updateGalleryUrlInput();
-    setInputElements();
+    setDocumentUrlParams();
 
     window.mics = [];
 
-    updateBoxes();
+    initBoxes();
     document
         .querySelectorAll('.url-param')
-        .forEach((elem) => elem.addEventListener('change', updateUrlParams));
+        .forEach((elem) => elem.addEventListener('change', updateUrlParam));
 
     document.getElementById('add-box-btn').addEventListener('click', () => addBox());
 

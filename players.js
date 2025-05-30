@@ -1,9 +1,9 @@
-import { parseDocumentConfig } from './tools.js';
+import { getDocumentUrlParams } from './tools.js';
 
 function getPlayer(type, value, id) {
     console.assert(id);
     const config = new URLSearchParams();
-    parseDocumentConfig().forEach((val, key) => config.append(key.substring(2), val));
+    getDocumentUrlParams().forEach((val, key) => config.append(key, val));
     const urlParams = `boxId=${id}&value=${value}&${config.toString()}`;
 
     if (type === 'SS') {
