@@ -993,9 +993,6 @@
   .z-20 {
     z-index: 20;
   }
-  .z-30 {
-    z-index: 30;
-  }
   .container {
     width: 100%;
     @media (width >= 40rem) {
@@ -1539,6 +1536,9 @@
       margin-bottom: 0;
     }
   }
+  .-mt-\[5px\] {
+    margin-top: calc(5px * -1);
+  }
   .mt-1 {
     margin-top: calc(var(--spacing) * 1);
   }
@@ -1771,6 +1771,9 @@
   .h-4 {
     height: calc(var(--spacing) * 4);
   }
+  .h-\[18px\] {
+    height: 18px;
+  }
   .h-\[20px\] {
     height: 20px;
   }
@@ -1936,9 +1939,6 @@
   }
   .pr-\[20px\] {
     padding-right: 20px;
-  }
-  .pl-\[25px\] {
-    padding-left: 25px;
   }
   .text-center {
     text-align: center;

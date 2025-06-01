@@ -137,11 +137,11 @@ function createBox(name, type, value) {
         'box w-[279px] h-fit overflow-hidden rounded-lg bg-slate-700 m-1 border border-neutral';
     box.innerHTML = `
       <div class="box-controls w-full h-[22px] flex items-center relative">
-        <div class="box-name-container absolute top-0 left-0 f-full w-full bg-base-300 pl-[25px] text-center z-20">
-          <div class="box-number badge badge-sm badge-neutral mx-1 h-[20px] z-30"></div>
+        <div class="box-name-container absolute top-0 left-0 h-[22px] w-full bg-base-300 text-center z-20">
+          <div class="box-number badge badge-sm badge-neutral -mt-[5px] h-[18px]"></div>
           <span class="box-name whitespace-nowrap text-sm">${name}</span>
         </div>
-        <div class="handle mx-1 cursor-grab z-30">☰</div>
+        <div class="handle mx-1 cursor-grab">☰</div>
         <div class="flex-grow"></div>
         <button class="expand-btn btn btn-soft btn-secondary btn-xs mx-1 h-[20px]">🖥️</button>
 
