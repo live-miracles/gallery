@@ -1964,6 +1964,9 @@
   .text-error {
     color: var(--color-error);
   }
+  .text-neutral-content {
+    color: var(--color-neutral-content);
+  }
   .btn-ghost {
     &:not(.btn-active, :hover, :active:focus, :focus-visible) {
       --btn-shadow: "";
@@ -2051,13 +2054,6 @@
     &:hover {
       @media (hover: hover) {
         background-color: var(--color-neutral);
-      }
-    }
-  }
-  .hover\:text-neutral {
-    &:hover {
-      @media (hover: hover) {
-        color: var(--color-neutral);
       }
     }
   }

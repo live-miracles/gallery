@@ -92,7 +92,6 @@ function createEditForm(name, type, value) {
         (async () => {
             window.mics = await getAvailableMics();
             const newForm = createEditForm(nameInput.value, typeInput.value, value);
-            newForm.classList.remove('hidden');
             div.parentElement.replaceChild(newForm, div);
         })();
     }
