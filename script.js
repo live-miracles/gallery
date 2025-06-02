@@ -1,6 +1,5 @@
 import {
     setDocumentUrlParams,
-    setInputValue,
     updateUrlParam,
     updateGalleryUrlInput,
     parseNumbers,

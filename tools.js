@@ -10,13 +10,7 @@ function getInputValue(input) {
     }
 }
 
-function setInputValue(id, value) {
-    const input = document.getElementById(id, value);
-    console.assert(input !== null, 'Can\'t find element with ID "' + id + '"');
-    if (input === null) {
-        return;
-    }
-
+function setInputValue(input, value) {
     if (input.type === 'checkbox') {
         console.assert(['0', '1'].includes(value));
         input.checked = value === '1';
@@ -34,7 +28,7 @@ function setDocumentUrlParams() {
     document.querySelectorAll('.url-param').forEach((input) => {
         const value = searchParams.get(input.id);
         if (value) {
-            setInputValue(input.id, value);
+            setInputValue(input, value);
         }
     });
 }
@@ -175,7 +169,6 @@ function parseNumbers(str) {
 
 export {
     updateBoxesParam,
-    setInputValue,
     setDocumentUrlParams,
     getDocumentUrlParams,
     updateUrlParam,
