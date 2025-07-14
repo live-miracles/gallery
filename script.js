@@ -84,8 +84,8 @@ function rotateAudio(index = 0, waitTime = -1) {
             e.target.value = paste;
         } else {
             const rows = parseSheetBuffer(paste);
-            const pairs = rows.map((r) => r.key + '=YT' + r.value);
-            e.target.value = base + '?' + pairs.join('&');
+            const param = rows.map((r) => r.key + '.YT.' + r.value).join('~');
+            e.target.value = base + '?boxes=' + param;
         }
     };
     galleryUrl.addEventListener('keydown', (e) => {
