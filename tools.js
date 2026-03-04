@@ -59,15 +59,14 @@ function updateUrlParam(e) {
 }
 
 function updateBoxesParam() {
-    const boxes = [];
     const param = Array.from(document.querySelectorAll('.box'))
         .map((box) => {
-            const name = box.getAttribute('data-name').replace(/[.~]/g, '');
-            const type = box.getAttribute('data-type').replace(/[.~]/g, '');
-            const value = box.getAttribute('data-value').replaceAll('~', '\\~');
+            const name = box.getAttribute('data-name').replace(/[.¦]/g, '');
+            const type = box.getAttribute('data-type').replace(/[.¦]/g, '');
+            const value = box.getAttribute('data-value').replaceAll('¦', '\\¦');
             return name + '.' + type + '.' + value;
         })
-        .join('~');
+        .join('¦');
 
     const url = new URL(window.location.href);
     url.searchParams.set('boxes', param);
@@ -76,17 +75,14 @@ function updateBoxesParam() {
 }
 
 function updateGalleryUrlInput() {
-    document.getElementById('gallery-url').value = window.location.href;
+    const url = window.location.href.replaceAll('%C2%A6', '¦');
+    document.getElementById('gallery-url').value = url;
     if (window.location.search !== '') {
-        localStorage.setItem('galleryUrl', window.location.href);
+        localStorage.setItem('galleryUrl', url);
     }
 }
 
 // ===== General Purpose Utils =====
-function capitalizeFirst(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-}
-
 function generateUUID() {
     return (Math.random() + 1).toString(36).substring(2);
 }

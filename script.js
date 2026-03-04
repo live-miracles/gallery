@@ -7,19 +7,33 @@ import {
 } from './tools.js';
 import { addBox, getBoxes, updateBoxNumbers } from './box.js';
 
+function splitTwice(str, separator) {
+    const ans = [str, '', ''];
+
+    const index1 = ans[0].indexOf(separator);
+    if (index1 === -1) return ans;
+    ans[1] = ans[0].slice(index1 + 1);
+    ans[0] = ans[0].slice(0, index1);
+
+    const index2 = ans[1].indexOf(separator);
+    if (index2 === -1) return ans;
+    ans[2] = ans[1].slice(index2 + 1);
+    ans[1] = ans[1].slice(0, index2);
+
+    return ans;
+}
+
 function initBoxes() {
     document.getElementById('gallery').innerHTML = '';
 
     const params = new URLSearchParams(window.location.search);
     const boxesParam = params.get('boxes') ? params.get('boxes') : '';
-    const boxes = boxesParam
-        .split(/(?<!\\)~/)
+    if (boxesParam === '') addBox();
+    boxesParam
+        .split(/(?<!\\)¦/)
         .filter(Boolean)
-        .map((str) => str.split('.', 3))
-        .forEach((param) => addBox(param[0], param[1], param[2].replaceAll('\\~', '~')));
-    if (boxesParam === '') {
-        addBox();
-    }
+        .map((str) => splitTwice(str, '.'))
+        .forEach((param) => addBox(param[0], param[1], param[2].replaceAll('\\¦', '¦')));
 }
 
 function getRotationBoxes() {
